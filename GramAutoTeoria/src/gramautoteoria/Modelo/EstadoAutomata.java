@@ -5,21 +5,28 @@
  */
 package gramautoteoria.Modelo;
 
+import java.util.ArrayList;
+
 
 public class EstadoAutomata {
     
-    String Estado;
-    String simbolo;
-    String transicion;
-    boolean aceptacion;
+    private String Estado;
+    private ArrayList<Transicion> transiciones;
+    private boolean aceptacion;
 
     public EstadoAutomata() {
     }
 
-    public EstadoAutomata(String Estado, String simbolo, String transicion, boolean aceptacion) {
+    public EstadoAutomata(String Estado, ArrayList<Transicion> transiciones, boolean aceptacion) {
         this.Estado = Estado;
-        this.simbolo = simbolo;
-        this.transicion = transicion;
+        this.transiciones = transiciones;
+        this.aceptacion = aceptacion;
+    }
+    
+    public EstadoAutomata(String Estado, boolean aceptacion) {
+        ArrayList<Transicion> transicionesA = new ArrayList<Transicion>();
+        this.Estado = Estado;
+        this.transiciones = transicionesA;
         this.aceptacion = aceptacion;
     }
 
@@ -31,29 +38,25 @@ public class EstadoAutomata {
         this.Estado = Estado;
     }
 
-    public String getSimbolo() {
-        return simbolo;
+    public ArrayList<Transicion> getTransiciones() {
+        return transiciones;
     }
 
-    public void setSimbolo(String simbolo) {
-        this.simbolo = simbolo;
+    public void setTransiciones(ArrayList<Transicion> transiciones) {
+        this.transiciones = transiciones;
     }
 
-    public String getTransicion() {
-        return transicion;
-    }
-
-    public void setTransicion(String transicion) {
-        this.transicion = transicion;
-    }
-
-    public boolean getAceptacion() {
+    public boolean isAceptacion() {
         return aceptacion;
     }
 
     public void setAceptacion(boolean aceptacion) {
         this.aceptacion = aceptacion;
     }
+    
+    
+
+    
     
     
     

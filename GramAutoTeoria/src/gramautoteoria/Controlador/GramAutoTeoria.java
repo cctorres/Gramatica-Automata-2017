@@ -20,12 +20,24 @@ public class GramAutoTeoria {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+         
+         Automata a = new Automata();
+        a.agregarEstados("A", false);
+        a.agregarEstados("B", false);
+        a.agregarEstados("C", true);
         
-        EstadoAutomata uno = new EstadoAutomata("A","a","B",false);
-        ArrayList<EstadoAutomata> estados = new ArrayList();
-        estados.add(uno);
-        Automata automata = new Automata(estados);
-        System.out.println(automata.imprimirAutomata());
+        a.agregarTransicionAutomata("A", "0", "B");
+        a.agregarTransicionAutomata("A", "1", "B");
+        a.agregarTransicionAutomata("A", "1", "C");
+        a.agregarTransicionAutomata("B", "1", "C");
+        a.agregarTransicionAutomata("C", "1", "A");
+        System.out.println(a.esDeterministico());
+        System.out.println(a.imprimirAutomata());
+        
+        System.out.println(a.evaluarHilera("11"));
+        
+        
+        
     }
     
 }
