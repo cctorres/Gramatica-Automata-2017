@@ -128,5 +128,32 @@ public class Automata {
         return b;
     }
     
+    public Automata AFNDaAFD(){
+       Automata AFD = new Automata();
+       for(int i =0; i < this.simbolosEntrada.size();i++){
+           AFD.agregarSimboloEntrada(this.simbolosEntrada.get(i));
+       }
+       for (int i = 0; i < this.estados.size(); i++) {
+            AFD.agregarEstados(this.estados.get(i).getEstado(), this.estados.get(i).isAceptacion());
+            for (int j = 0; j < this.simbolosEntrada.size(); j++) {
+                String transicion = this.estados.get(i).unirTransiciones(this.simbolosEntrada.get(j));                
+                AFD.agregarTransicionAutomata(this.estados.get(i).getEstado(), this.simbolosEntrada.get(j), transicion);
+            }
+        }
+       int k = 2;
+       while(k <= this.estados.size()){
+           for (int i = 0; i < this.estados.size(); i++) {
+               for (int j = 0; i < k; j++) {
+
+               }
+           }
+           k++;
+       }
+           
+       
+       return AFD;
+    }
+    
+    
     
 }

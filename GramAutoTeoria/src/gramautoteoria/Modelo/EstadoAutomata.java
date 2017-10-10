@@ -54,7 +54,28 @@ public class EstadoAutomata {
         this.aceptacion = aceptacion;
     }
     
+    public boolean estadoDeterministico(){
+        for(int j =0; j < this.getTransiciones().size()-1;j++){
+                for(int k =j+1; k < this.getTransiciones().size();k++){
+                    Transicion transicionJ = (Transicion) this.getTransiciones().get(j);
+                    Transicion transicionK = (Transicion) this.getTransiciones().get(k);
+                    if(transicionJ.getSimbolo().equals(transicionK.getSimbolo())){
+                        return false;
+                    }
+                }               
+            }
+        return true;
+    }
     
+    public String unirTransiciones(String simbolo){
+        String resultado = "";
+        for(int i = 0; i < transiciones.size(); i++){
+            if(transiciones.get(i).getSimbolo().equals(simbolo)){
+                resultado = resultado+transiciones.get(i).getTransición();
+            }
+        }
+        return resultado;
+    }
 
     
     
