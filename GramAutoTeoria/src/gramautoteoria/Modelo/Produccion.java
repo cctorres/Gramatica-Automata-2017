@@ -55,4 +55,38 @@ public class Produccion {
         }
         return true;
     }
+    
+    public void agregarNoTerminales(ArrayList<String> NTA){
+        String derecho = this.derecha;
+        for(int i = 0; i < derecho.length();i++){
+            if(derecho.substring(i, i+1).equals("<")){
+                String noTerminal = "";
+                while(!derecho.substring(i, i+1).equals(">")){
+                    noTerminal = noTerminal+derecho.substring(i, i+1);
+                    i++;
+                }
+                noTerminal = noTerminal+">";
+                if(!NTA.contains(noTerminal)){
+                  NTA.add(noTerminal);  
+                }
+                
+            }
+        }
+    }
+    
+    public boolean esLinealDerecha(){
+        String derecho = this.derecha;
+        for(int i = 0; i < derecho.length(); i++){
+            if(derecho.substring(i, i+1).equals("<")){
+                while(!derecho.substring(i, i+1).equals(">")){                    
+                    i++;
+                }                
+                String aux = derecho.substring(i+1);
+                if(aux.length()>0){
+                    return false;
+                }
+            }
+        }        
+        return true;
+    }
 }

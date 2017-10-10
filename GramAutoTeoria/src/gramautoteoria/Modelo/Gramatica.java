@@ -38,7 +38,7 @@ public class Gramatica {
         this.getProducciones().add(produccionNueva);
     }
     
-    public ArrayList<String> NoTerminalesVivos(){
+    public ArrayList<String> noTerminalesVivos(){
         ArrayList<String> NTV = new ArrayList<>();
         int m = 0;
         boolean cambio = true;
@@ -60,8 +60,8 @@ public class Gramatica {
         return NTV;
     }
     
-    public ArrayList<String> NoTerminalesMuertos(){
-        ArrayList<String> NTV = this.NoTerminalesVivos();
+    public ArrayList<String> noTerminalesMuertos(){
+        ArrayList<String> NTV = this.noTerminalesVivos();
         ArrayList<String> NTM = new ArrayList<>();
         for(int i =0; i<this.producciones.size();i++){
             if(!NTV.contains(this.producciones.get(i).getIzquierdo()) & !NTM.contains(this.producciones.get(i).getIzquierdo())){
@@ -72,8 +72,8 @@ public class Gramatica {
     }
     
     public Gramatica eliminarNTM(){
-        ArrayList<String> NTV = this.NoTerminalesVivos();
-        ArrayList<String> NTM = this.NoTerminalesMuertos();
+        ArrayList<String> NTV = this.noTerminalesVivos();
+        ArrayList<String> NTM = this.noTerminalesMuertos();
         Gramatica resultado = new Gramatica();
         for(int i =0; i<this.producciones.size();i++){
             if(NTV.contains(this.producciones.get(i).getIzquierdo())){
@@ -89,5 +89,80 @@ public class Gramatica {
         return resultado;
     }
     
+    public ArrayList<String> noTerminalesAlcanzables(){
+        ArrayList<String> NTA = new ArrayList<>();
+        NTA.add(this.producciones.get(0).getIzquierdo());
+        int m = 1;
+        boolean cambio = true;
+        while (cambio == true) {
+            cambio = false;
+            for (int i = 0; i < this.producciones.size(); i++) {
+                Produccion prod = this.producciones.get(i);
+                if (NTA.contains(prod.getIzquierdo())) {
+                    prod.agregarNoTerminales(NTA);
+                }
+            }
+            if (m != NTA.size()) {
+                cambio = true;
+            }
+            m = NTA.size();
+        }
+        return NTA;
+    }
     
+    public ArrayList<String> noTerminalesInalcanzables(){
+        ArrayList<String> NTA = this.noTerminalesAlcanzables();
+        ArrayList<String> NTI = new ArrayList<>();
+        for(int i =0; i<this.producciones.size();i++){
+            if(!NTA.contains(this.producciones.get(i).getIzquierdo()) & !NTI.contains(this.producciones.get(i).getIzquierdo())){
+                NTI.add(this.producciones.get(i).getIzquierdo());
+            }
+        }
+        return NTI;
+    }
+    
+    public Gramatica eliminarNTI(){
+        ArrayList<String> NTA = this.noTerminalesAlcanzables();
+        ArrayList<String> NTI = this.noTerminalesInalcanzables();
+        Gramatica resultado = new Gramatica();
+        for(int i =0; i<this.producciones.size();i++){
+            if(NTA.contains(this.producciones.get(i).getIzquierdo())){
+                Produccion copia = (Produccion) this.getProducciones().get(i);
+                String derecho = copia.getDerecha();
+                for(int j = 0; j < NTI.size(); j++){
+                    if(!derecho.contains(NTI.get(j))){
+                        resultado.agregarProduccion(copia.getIzquierdo(), derecho);
+                    }                    
+                }               
+            }
+        }
+        return resultado;
+    }
+    
+    public Gramatica simplificar(){
+        Gramatica aux = this.eliminarNTM();
+        Gramatica resultado = aux.eliminarNTI();
+        return resultado;
+    }
+    
+    public boolean esSimplificable(){
+        ArrayList<String> NTM = this.noTerminalesMuertos();
+        ArrayList<String> NTI = this.noTerminalesInalcanzables();
+        return NTM.size()>0 | NTI.size()>0;
+    }
+    
+    public void modificarGramatica(int numero, String lado, String cambio){
+        Produccion nuevo = this.producciones.get(numero-1);
+        if(lado.equalsIgnoreCase("derecho")){
+            nuevo.setDerecha(cambio);
+        }
+        else{
+            nuevo.setIzquierdo(cambio);
+        }
+        this.producciones.set(numero-1, nuevo);
+    }
+    
+    public void eliminarProduccion(int numero){
+        this.producciones.remove(numero-1);
+    }
 }

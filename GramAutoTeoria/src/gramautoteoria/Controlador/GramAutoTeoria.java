@@ -8,6 +8,7 @@ package gramautoteoria.Controlador;
 import gramautoteoria.Modelo.Automata;
 import gramautoteoria.Modelo.EstadoAutomata;
 import gramautoteoria.Modelo.Gramatica;
+import gramautoteoria.Modelo.Produccion;
 import java.util.ArrayList;
 
 /**
@@ -41,28 +42,34 @@ public class GramAutoTeoria {
         */
         Gramatica g = new Gramatica();
         
-        g.agregarProduccion("<S>", "a<A><B><S>");
-        g.agregarProduccion("<S>", "b<C><A><C>d");
-        g.agregarProduccion("<A>", "b<A><B>");
-        g.agregarProduccion("<A>", "c<S><A>");
-        g.agregarProduccion("<A>", "c<C><C>");
-        g.agregarProduccion("<B>", "b<A><B>");
-        g.agregarProduccion("<B>", "c<S><B>");
-        g.agregarProduccion("<C>", "c<S>");
-        g.agregarProduccion("<C>", "c");
+        g.agregarProduccion("<S>", "a<A><B>");
+        g.agregarProduccion("<S>", "");
+        g.agregarProduccion("<A>", "d<D><A>");
+        g.agregarProduccion("<A>", "e");
+        g.agregarProduccion("<B>", "b<E>");
+        g.agregarProduccion("<B>", "f");
+        g.agregarProduccion("<C>", "c<A><B>");
+        g.agregarProduccion("<C>", "d<S><D>");
+        g.agregarProduccion("<C>", "a");
+        g.agregarProduccion("<D>", "e<A>");
+        g.agregarProduccion("<E>", "f<A>");
+        g.agregarProduccion("<E>", "g");
         System.out.println(g.imprimirGramatica());
         
-        ArrayList<String> nTV = g.NoTerminalesVivos();
+        ArrayList<String> nTV = g.noTerminalesAlcanzables();
         System.out.println(nTV.toString());
-        ArrayList<String> nTM = g.NoTerminalesMuertos();
+        ArrayList<String> nTM = g.noTerminalesInalcanzables();
         System.out.println(nTM.toString());
         
-        Gramatica gg = g.eliminarNTM();
+        Gramatica gg = g.eliminarNTI();
         System.out.println(gg.imprimirGramatica());
         
+        g.eliminarProduccion(1);
+        System.out.println(g.imprimirGramatica());
         
         
-        
+        Produccion p = new Produccion("S","a");
+        System.out.println(p.esLinealDerecha());
         
         
     }
