@@ -76,6 +76,17 @@ public class EstadoAutomata {
         }
         return resultado;
     }
+    
+    public ArrayList<String> evaluarTransicion(String simbolo){
+        ArrayList<String> salida = new ArrayList<>();
+        for(int i = 0; i < this.transiciones.size();i++){
+            Transicion transicionEvaluar = (Transicion) this.transiciones.get(i);
+            if(transicionEvaluar.getSimbolo().equalsIgnoreCase(simbolo)){
+                salida.add(transicionEvaluar.getTransición());
+            }
+        }
+        return salida;
+    }
 
     
     

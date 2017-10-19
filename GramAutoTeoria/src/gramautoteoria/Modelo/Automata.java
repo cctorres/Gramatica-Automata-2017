@@ -140,8 +140,8 @@ public class Automata {
                 AFD.agregarTransicionAutomata(this.estados.get(i).getEstado(), this.simbolosEntrada.get(j), transicion);
             }
         }
-       int k = 2;
-       while(k <= this.estados.size()){
+       int k = 2
+;       while(k <= this.estados.size()){
            for (int i = 0; i < this.estados.size(); i++) {
                for (int j = 0; i < k; j++) {
 
@@ -152,6 +152,16 @@ public class Automata {
            
        
        return AFD;
+    }
+    
+    public Automata AFNDaAFDr(){
+        Automata AFD = new Automata();
+        EstadoAutomata estadoInicial = this.estados.get(0);
+        
+        
+        
+        
+        return AFD;
     }
     
     
