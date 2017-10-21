@@ -23,24 +23,33 @@ public class GramAutoTeoria {
     public static void main(String[] args) {
         // TODO code application logic here
         
-        /*
+        
         Automata a = new Automata();
         a.agregarEstados("A", false);
-        a.agregarEstados("B", false);
+        a.agregarEstados("B", true);
         a.agregarEstados("C", true);
+        a.agregarEstados("D", false);
+        
+ 
         
         a.agregarTransicionAutomata("A", "0", "B");
-        a.agregarTransicionAutomata("A", "1", "B");
         a.agregarTransicionAutomata("A", "1", "C");
-        a.agregarTransicionAutomata("B", "1", "C");
-        a.agregarTransicionAutomata("C", "1", "A");
+        a.agregarTransicionAutomata("A", "1", "D");
+        a.agregarTransicionAutomata("B", "0", "A");
+        a.agregarTransicionAutomata("B", "1", "B");
+        a.agregarTransicionAutomata("C", "0", "C");
+        a.agregarTransicionAutomata("C", "1", "D");
+        a.agregarTransicionAutomata("D", "0", "A");
+        a.agregarTransicionAutomata("D", "1", "C");
+        
         System.out.println(a.esDeterministico());
         System.out.println(a.imprimirAutomata());
         
         System.out.println(a.evaluarHilera("11"));
         
-        */
-        Gramatica g = new Gramatica();
+        Automata b = a.AFNDaAFD();
+        System.out.println(b.imprimirAutomata());
+        /*Gramatica g = new Gramatica();
         
         g.agregarProduccion("<S>", "a<A><B>");
         g.agregarProduccion("<S>", "");
@@ -70,6 +79,8 @@ public class GramAutoTeoria {
         
         Produccion p = new Produccion("S","a");
         System.out.println(p.esLinealDerecha());
+        
+        System.out.println("ID: 11".substring(4));9*/
         
         
     }

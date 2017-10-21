@@ -15,12 +15,20 @@ public class EstadoAutomata {
     private boolean aceptacion;
 
     public EstadoAutomata() {
+        ArrayList<Transicion> transicionesA = new ArrayList<Transicion>();
+        this.transiciones = transicionesA;
     }
 
     public EstadoAutomata(String Estado, ArrayList<Transicion> transiciones, boolean aceptacion) {
         this.Estado = Estado;
         this.transiciones = transiciones;
         this.aceptacion = aceptacion;
+    }
+    
+    public EstadoAutomata(String Estado, ArrayList<Transicion> transiciones) {
+        this.Estado = Estado;
+        this.transiciones = transiciones;
+        this.aceptacion = false;
     }
     
     public EstadoAutomata(String Estado, boolean aceptacion) {
@@ -86,6 +94,22 @@ public class EstadoAutomata {
             }
         }
         return salida;
+    }
+    
+    public void agregarTransicion(String simbolo, String estadoSiguiente){
+        Transicion nuevaTransicion = new Transicion(simbolo, estadoSiguiente);
+        this.transiciones.add(nuevaTransicion);
+    }
+    
+    public EstadoAutomata clonar(){
+        EstadoAutomata clon = new EstadoAutomata();
+        clon.setEstado(this.getEstado());
+        clon.setAceptacion(this.aceptacion);
+        for(int i=0;i<this.getTransiciones().size();i++){
+            Transicion nueva = new Transicion(this.getTransiciones().get(i).getSimbolo(),this.getTransiciones().get(i).getTransición());
+            clon.transiciones.add(nueva);
+        }
+        return clon;
     }
 
     

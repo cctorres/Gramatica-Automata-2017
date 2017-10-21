@@ -129,41 +129,94 @@ public class Automata {
     }
     
     public Automata AFNDaAFD(){
-       Automata AFD = new Automata();
-       for(int i =0; i < this.simbolosEntrada.size();i++){
-           AFD.agregarSimboloEntrada(this.simbolosEntrada.get(i));
-       }
-       for (int i = 0; i < this.estados.size(); i++) {
-            AFD.agregarEstados(this.estados.get(i).getEstado(), this.estados.get(i).isAceptacion());
-            for (int j = 0; j < this.simbolosEntrada.size(); j++) {
-                String transicion = this.estados.get(i).unirTransiciones(this.simbolosEntrada.get(j));                
-                AFD.agregarTransicionAutomata(this.estados.get(i).getEstado(), this.simbolosEntrada.get(j), transicion);
+       Automata retorno = new Automata();
+       ArrayList<String> estadosAceptacion = this.estadosAceptacion();
+        retorno.clonarSimbolos(this);
+        EstadoAutomata nuevoEstado = this.estados.get(0).clonar();
+        retorno.estados.add(nuevoEstado);
+        for (int i = 0; i < retorno.estados.size(); i++) {
+            EstadoAutomata estadoEvaluado = retorno.estados.get(i);
+            for (int j = 0; j < retorno.simbolosEntrada.size(); j++) {
+                String simbolo = retorno.simbolosEntrada.get(j);
+                ArrayList<String> salidas = estadoEvaluado.evaluarTransicion(simbolo);
+                if (salidas.size() > 0) {
+                    String estadoNuevo = "";
+                    boolean aceptacion = false;
+                    for (int k = 0; k < salidas.size(); k++) {
+                            estadoNuevo = estadoNuevo+salidas.get(k);
+                            if(!aceptacion){
+                                aceptacion = estadosAceptacion.contains(salidas.get(k));
+                            }
+                        }                    
+                        if (!retorno.existeEstado(estadoNuevo)) {
+                            EstadoAutomata estadoAAgregar = new EstadoAutomata(estadoNuevo,aceptacion);
+                            retorno.estados.add(estadoAAgregar);
+
+                    }
+                }
             }
         }
-       int k = 2
-;       while(k <= this.estados.size()){
-           for (int i = 0; i < this.estados.size(); i++) {
-               for (int j = 0; i < k; j++) {
+        
+        
+        
+        return retorno;
+    }
+    
+    
+    
+    public ArrayList<String> estadosAceptacion(){
+        ArrayList<String> estadosA = new ArrayList<>();
+        for(int i=0;i<this.estados.size();i++){
+            if(this.estados.get(i).isAceptacion()){
+                estadosA.add(this.estados.get(i).getEstado());
+            }
+        }
+        return estadosA;
+    }
+    
+    public Automata eliminarEstadosExtraños(){
+        Automata retorno = new Automata();
+        retorno.clonarSimbolos(this);
+        EstadoAutomata nuevoEstado = this.estados.get(0).clonar();
+        retorno.estados.add(nuevoEstado);
+        for (int i = 0; i < retorno.estados.size(); i++) {
+            EstadoAutomata estadoEvaluado = retorno.estados.get(i);
+            for (int j = 0; j < retorno.simbolosEntrada.size(); j++) {
+                String simbolo = retorno.simbolosEntrada.get(j);
+                ArrayList<String> salidas = estadoEvaluado.evaluarTransicion(simbolo);
+                if (salidas.size() > 0) {
+                    for (int k = 0; k < salidas.size(); k++) {
+                        String estadoNuevo = salidas.get(k);
+                        if (!retorno.existeEstado(estadoNuevo)) {
+                            int posEstado = this.retonarPosEstado(estadoNuevo);
+                            EstadoAutomata estadoAClonar = this.estados.get(posEstado);
+                            EstadoAutomata estadoAAgregar = estadoAClonar.clonar();
+                            retorno.estados.add(estadoAAgregar);
+                        }
 
-               }
-           }
-           k++;
-       }
-           
-       
-       return AFD;
+                    }
+                }
+            }
+        }
+        
+        
+        
+        return retorno;
     }
     
-    public Automata AFNDaAFDr(){
-        Automata AFD = new Automata();
-        EstadoAutomata estadoInicial = this.estados.get(0);
-        
-        
-        
-        
-        return AFD;
+    public void clonarSimbolos(Automata automataAClonar){
+        for(int i=0;i<automataAClonar.simbolosEntrada.size();i++){
+            this.simbolosEntrada.add(automataAClonar.simbolosEntrada.get(i));
+        }
     }
     
-    
+    public boolean existeEstado(String estado){
+        for(int i=0;i<this.estados.size();i++){
+            if(estado.equals(this.estados.get(i).getEstado())){
+                return true;
+            }
+        }
+        return false;
+    }
     
 }
