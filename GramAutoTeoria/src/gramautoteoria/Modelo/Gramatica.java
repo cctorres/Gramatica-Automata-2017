@@ -165,4 +165,18 @@ public class Gramatica {
     public void eliminarProduccion(int numero){
         this.producciones.remove(numero-1);
     }
+    
+    public boolean esRegular(){
+        for(int i=0;i<this.producciones.size();i++){
+            if(!this.producciones.get(i).esLinealDerecha()){
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    public void reiniciarGramatica(){
+        ArrayList<Produccion> nuevo = new ArrayList<>();
+        this.setProducciones(nuevo);
+    }
 }

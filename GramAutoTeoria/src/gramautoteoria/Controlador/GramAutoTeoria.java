@@ -9,6 +9,7 @@ import gramautoteoria.Modelo.Automata;
 import gramautoteoria.Modelo.EstadoAutomata;
 import gramautoteoria.Modelo.Gramatica;
 import gramautoteoria.Modelo.Produccion;
+import gramautoteoria.Vista.Principal;
 import java.util.ArrayList;
 
 /**
@@ -24,7 +25,7 @@ public class GramAutoTeoria {
         // TODO code application logic here
         
         
-        Automata a = new Automata();
+        /*Automata a = new Automata();
         a.agregarEstados("A", false);
         a.agregarEstados("B", true);
         a.agregarEstados("C", true);
@@ -48,7 +49,7 @@ public class GramAutoTeoria {
         System.out.println(a.evaluarHilera("11"));
         
         Automata b = a.AFNDaAFD();
-        System.out.println(b.imprimirAutomata());
+        System.out.println(b.imprimirAutomata());*/
         /*Gramatica g = new Gramatica();
         
         g.agregarProduccion("<S>", "a<A><B>");
@@ -81,6 +82,11 @@ public class GramAutoTeoria {
         System.out.println(p.esLinealDerecha());
         
         System.out.println("ID: 11".substring(4));9*/
+        
+        Principal grafica = new Principal();
+        grafica.setVisible(true);  
+        
+        
         
         
     }
