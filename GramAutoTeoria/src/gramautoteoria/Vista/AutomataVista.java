@@ -90,7 +90,7 @@ public class AutomataVista extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         evaluarBoton = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        deterministicoBoton = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         Tabla = new javax.swing.JTable();
@@ -110,7 +110,7 @@ public class AutomataVista extends javax.swing.JFrame {
 
         jButton2.setText("Eliminar Estados Extraños");
 
-        jButton3.setText("AFNDaAFD");
+        deterministicoBoton.setText("¿Es deterministico?");
 
         jButton4.setText("Estados Equivalentes");
 
@@ -151,7 +151,7 @@ public class AutomataVista extends javax.swing.JFrame {
                             .addComponent(jButton4))
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel1)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(deterministicoBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(resultadoTexto, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -178,7 +178,7 @@ public class AutomataVista extends javax.swing.JFrame {
                     .addComponent(jButton2)
                     .addComponent(jButton4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton3)
+                .addComponent(deterministicoBoton)
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
@@ -253,10 +253,10 @@ public class AutomataVista extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable Tabla;
+    private javax.swing.JButton deterministicoBoton;
     private javax.swing.JButton evaluarBoton;
     private javax.swing.JButton guardarAutomataBoton;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
