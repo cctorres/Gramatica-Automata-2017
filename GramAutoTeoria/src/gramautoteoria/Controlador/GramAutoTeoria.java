@@ -9,7 +9,7 @@ import gramautoteoria.Modelo.Automata;
 import gramautoteoria.Modelo.EstadoAutomata;
 import gramautoteoria.Modelo.Gramatica;
 import gramautoteoria.Modelo.Produccion;
-import gramautoteoria.Vista.Principal;
+import gramautoteoria.Vista.GramaticaVista;
 import java.util.ArrayList;
 
 /**
@@ -83,7 +83,7 @@ public class GramAutoTeoria {
         
         System.out.println("ID: 11".substring(4));9*/
         
-        Principal grafica = new Principal();
+        GramaticaVista grafica = new GramaticaVista();
         grafica.setVisible(true);  
         
         

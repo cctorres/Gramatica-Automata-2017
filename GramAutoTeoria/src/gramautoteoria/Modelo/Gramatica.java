@@ -28,7 +28,13 @@ public class Gramatica {
         String resultado = "";
         for(int i = 0; i < this.producciones.size();i++){
             Produccion produccion = (Produccion) this.producciones.get(i);
-            resultado = resultado+"\n"+produccion.imprimirProduccion();
+            if(i ==0){
+                resultado = Integer.toString(i+1)+". "+produccion.imprimirProduccion();
+            }
+            else{
+                resultado = resultado+"\n"+Integer.toString(i+1)+". "+produccion.imprimirProduccion();
+            }
+            
         }        
         return resultado;
     }
@@ -74,6 +80,9 @@ public class Gramatica {
     public Gramatica eliminarNTM(){
         ArrayList<String> NTV = this.noTerminalesVivos();
         ArrayList<String> NTM = this.noTerminalesMuertos();
+        if(NTM.size() == 0){
+            return this;
+        }
         Gramatica resultado = new Gramatica();
         for(int i =0; i<this.producciones.size();i++){
             if(NTV.contains(this.producciones.get(i).getIzquierdo())){
@@ -125,6 +134,9 @@ public class Gramatica {
         ArrayList<String> NTA = this.noTerminalesAlcanzables();
         ArrayList<String> NTI = this.noTerminalesInalcanzables();
         Gramatica resultado = new Gramatica();
+        if(NTI.size() == 0){
+            return this;
+        }
         for(int i =0; i<this.producciones.size();i++){
             if(NTA.contains(this.producciones.get(i).getIzquierdo())){
                 Produccion copia = (Produccion) this.getProducciones().get(i);
@@ -175,8 +187,40 @@ public class Gramatica {
         return true;
     }
     
+       
     public void reiniciarGramatica(){
         ArrayList<Produccion> nuevo = new ArrayList<>();
         this.setProducciones(nuevo);
+    }
+    
+    public void generarGramaticaFiche(String fichero) {
+        String[] lineas = fichero.split("\n");
+        String izquierda = "";
+        String derecha = "";
+        for (int i = 1; i < lineas.length; i++) {
+            String linea = lineas[i];
+            for (int j = 0; j < linea.length(); j++) {
+                String sub = linea.substring(j, j + 1);
+                if (linea.substring(j, j + 1).equals("<") & izquierda.equals("")) {
+                    while (!linea.substring(j, j + 1).equals(">")) {
+                        sub = linea.substring(j, j + 1);
+                        izquierda = izquierda + linea.substring(j, j + 1);
+                        j++;
+                    }
+                    sub = linea.substring(j, j + 1);
+                    izquierda = izquierda + linea.substring(j, j + 1);
+                    j++;
+                }
+                sub = linea.substring(j, j + 1);
+                if (linea.substring(j, j + 1).equals(">") & !izquierda.equals("")) {
+                    derecha = linea.substring(j + 1);
+                    j = linea.length() + 1;
+                    this.agregarProduccion(izquierda, derecha);
+                    izquierda = "";
+                    derecha = "";
+                }
+
+            }
+        }
     }
 }
