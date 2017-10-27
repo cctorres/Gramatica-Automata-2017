@@ -82,7 +82,7 @@ public class GramAutoTeoria {
         System.out.println(p.esLinealDerecha());
         
         System.out.println("ID: 11".substring(4));9*/
-        
+            
         GramaticaVista grafica = new GramaticaVista();
         grafica.setVisible(true);  
         

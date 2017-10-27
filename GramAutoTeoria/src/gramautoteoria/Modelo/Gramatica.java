@@ -197,7 +197,7 @@ public class Gramatica {
         String[] lineas = fichero.split("\n");
         String izquierda = "";
         String derecha = "";
-        for (int i = 1; i < lineas.length; i++) {
+        for (int i = 0; i < lineas.length; i++) {
             String linea = lineas[i];
             for (int j = 0; j < linea.length(); j++) {
                 String sub = linea.substring(j, j + 1);
@@ -222,5 +222,31 @@ public class Gramatica {
 
             }
         }
+    }
+    
+    public Automata gramaticaAAutomata(){
+        Automata automata = new Automata();
+        for(int i=0; i<this.producciones.size();i++){
+            Produccion prod = this.producciones.get(i);
+            String estado = prod.getIzquierdo().substring(1, prod.getIzquierdo().length()-1);
+            if(prod.getDerecha().equals("")){
+                int pos = automata.retonarPosEstado(estado);
+                if(pos != -1){
+                    
+                    automata.estados.get(pos).setAceptacion(true);
+                }
+                else{
+                    automata.agregarEstados(estado, true);
+                }
+            }
+            else{
+            String derecha = prod.getDerecha();
+            String simbolo = derecha.substring(0,1);
+            String transicion = derecha.substring(2, prod.getIzquierdo().length());
+            automata.agregarTransicionAutomata(estado, simbolo, transicion);
+            }
+            
+        }
+        return automata;
     }
 }

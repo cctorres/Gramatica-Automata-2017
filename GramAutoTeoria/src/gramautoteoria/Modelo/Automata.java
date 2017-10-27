@@ -83,6 +83,10 @@ public class Automata {
         int pos;
         this.agregarSimboloEntrada(simboloEntrada);
         pos = this.retonarPosEstado(estadoActual);
+        if(pos == -1){
+            this.agregarEstados(estadoActual, false);
+        }
+        pos = this.retonarPosEstado(estadoActual);
         EstadoAutomata estadoContenido = this.estados.get(pos);
         Transicion transicionNueva = new Transicion(simboloEntrada,estadoSiguiente);
         estadoContenido.getTransiciones().add(transicionNueva);
@@ -96,7 +100,7 @@ public class Automata {
         for(int i = 0; i < this.estados.size(); i++){
             resultado = resultado+"\n"+"Estado "+this.estados.get(i).getEstado()+" :";
             for(int j = 0; j < this.estados.get(i).getTransiciones().size(); j++){
-                resultado = resultado+ this.estados.get(i).getTransiciones().get(j).getSimbolo()+">"+ this.estados.get(i).getTransiciones().get(j).getTransición()+" -- ";
+                resultado = resultado+ this.estados.get(i).getTransiciones().get(j).getSimbolo()+" -> "+ this.estados.get(i).getTransiciones().get(j).getTransición()+" -- ";
             }
             resultado = resultado+"  :: "+this.estados.get(i).isAceptacion();
         }
@@ -120,7 +124,7 @@ public class Automata {
             for(int k = 0; k < estado.getTransiciones().size() & b == false;k++){
                 if(estado.getTransiciones().get(k).getSimbolo().equals(simbolo)){
                     int posTransicion = this.retonarPosEstado(estado.getTransiciones().get(k).getTransición());
-                    //String transicion = estado.getTransiciones().get(k).getTransición();
+                    String transicion = estado.getTransiciones().get(k).getTransición();
                     b = this.evaluarHileraEstado(hilera, this.estados.get(posTransicion),i+1);
                 }
             }

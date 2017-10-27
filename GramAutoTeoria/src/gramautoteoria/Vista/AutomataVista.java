@@ -5,7 +5,10 @@
  */
 package gramautoteoria.Vista;
 
+import gramautoteoria.Modelo.Automata;
+import gramautoteoria.Modelo.Gramatica;
 import gramautoteoria.Vista.GramaticaVista;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -13,14 +16,22 @@ import gramautoteoria.Vista.GramaticaVista;
  */
 public class AutomataVista extends javax.swing.JFrame {
     
-    String gramatica = GramaticaVista.gramaticaTexto.getText();
+    String gramaticaTexto = GramaticaVista.gramaticaTexto.getText();
+    Gramatica gramaticaObjeto = new Gramatica();
+    Automata automata = new Automata();
 
     /**
      * Creates new form NewJFrame
      */
     public AutomataVista() {
         initComponents();
-        this.jTextPane1.setText(gramatica);
+        
+        gramaticaTexto = gramaticaTexto.replace(" ", "");
+        gramaticaTexto = gramaticaTexto.replace("\r", "");
+        gramaticaObjeto.generarGramaticaFiche(gramaticaTexto);
+        automata = gramaticaObjeto.gramaticaAAutomata();
+        this.jTextPane1.setText(automata.imprimirAutomata());
+        
         
     }
 
@@ -46,11 +57,14 @@ public class AutomataVista extends javax.swing.JFrame {
 
         jScrollPane1.setViewportView(jTextPane1);
 
-        jTextField1.setText("jTextField1");
-
         jLabel1.setText("Evaluar hilera");
 
         jButton1.setText("Evaluar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Eliminar Estados Extraños");
 
@@ -102,6 +116,16 @@ public class AutomataVista extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String hilera = jTextField1.getText();
+        if(automata.evaluarHilera(hilera)){
+            JOptionPane.showMessageDialog(null, "La hilera es válida");
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "La hilera no es válida");
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
