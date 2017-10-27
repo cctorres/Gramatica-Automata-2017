@@ -8,7 +8,13 @@ package gramautoteoria.Vista;
 import gramautoteoria.Modelo.Automata;
 import gramautoteoria.Modelo.Gramatica;
 import gramautoteoria.Vista.GramaticaVista;
+import static gramautoteoria.Vista.GramaticaVista.gramaticaTexto;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -19,6 +25,10 @@ public class AutomataVista extends javax.swing.JFrame {
     String gramaticaTexto = GramaticaVista.gramaticaTexto.getText();
     Gramatica gramaticaObjeto = new Gramatica();
     Automata automata = new Automata();
+    private JFileChooser seleccionar = new JFileChooser();
+    private File archivo;
+    private FileInputStream entrada;
+    private FileOutputStream salida;
 
     /**
      * Creates new form NewJFrame
@@ -30,9 +40,41 @@ public class AutomataVista extends javax.swing.JFrame {
         gramaticaTexto = gramaticaTexto.replace("\r", "");
         gramaticaObjeto.generarGramaticaFiche(gramaticaTexto);
         automata = gramaticaObjeto.gramaticaAAutomata();
-        this.jTextPane1.setText(automata.imprimirAutomata());
+        DefaultTableModel modelo = (DefaultTableModel) Tabla.getModel();
+        automata.imprimirAutomataTabla(modelo);
         
         
+        
+        
+    }
+    
+    public String abrirArchivo(File Archivo) {
+        String documento = "";
+        try {
+            entrada = new FileInputStream(archivo);
+            int ascci;
+            while ((ascci = entrada.read()) != -1) {
+                char caracter = (char) ascci;
+                documento += caracter;
+            }
+        } catch (Exception e) {
+
+        }
+
+        return documento;
+
+    }
+    
+    public String guardarArchivo(File archivo, String documento){
+        String mensaje = null;
+        try{
+            salida = new FileOutputStream(archivo);
+            byte [] bytxt = documento.getBytes();
+            salida.write(bytxt);
+            mensaje = "Archivo guardado";
+        } catch (Exception e){
+            
+        } return mensaje;
     }
 
     /**
@@ -44,25 +86,25 @@ public class AutomataVista extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextPane1 = new javax.swing.JTextPane();
-        jTextField1 = new javax.swing.JTextField();
+        resultadoTexto = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        evaluarBoton = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        Tabla = new javax.swing.JTable();
+        guardarAutomataBoton = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jScrollPane1.setViewportView(jTextPane1);
-
         jLabel1.setText("Evaluar hilera");
 
-        jButton1.setText("Evaluar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        evaluarBoton.setText("Evaluar");
+        evaluarBoton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                evaluarBotonActionPerformed(evt);
             }
         });
 
@@ -72,60 +114,104 @@ public class AutomataVista extends javax.swing.JFrame {
 
         jButton4.setText("Estados Equivalentes");
 
+        Tabla.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane2.setViewportView(Tabla);
+
+        guardarAutomataBoton.setText("Guardar automata");
+        guardarAutomataBoton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                guardarAutomataBotonActionPerformed(evt);
+            }
+        });
+
+        jButton6.setText("Leer automata");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(41, 41, 41)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jTextField1)
-                            .addGap(18, 18, 18)
-                            .addComponent(jButton1))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 456, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jButton3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jButton6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton4)))
-                .addContainerGap(35, Short.MAX_VALUE))
+                        .addComponent(guardarAutomataBoton))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jButton2)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jButton4))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel1)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(resultadoTexto, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(evaluarBoton))))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(54, 54, 54)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(guardarAutomataBoton)
+                    .addComponent(jButton6))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(resultadoTexto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(evaluarBoton))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
                     .addComponent(jButton4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton3)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String hilera = jTextField1.getText();
+    private void evaluarBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_evaluarBotonActionPerformed
+        String hilera = resultadoTexto.getText();
         if(automata.evaluarHilera(hilera)){
             JOptionPane.showMessageDialog(null, "La hilera es válida");
         }
         else{
             JOptionPane.showMessageDialog(null, "La hilera no es válida");
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_evaluarBotonActionPerformed
+
+    private void guardarAutomataBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarAutomataBotonActionPerformed
+        DefaultTableModel modelo = (DefaultTableModel) Tabla.getModel();
+        if (seleccionar.showDialog(null, "Guardar") == JFileChooser.APPROVE_OPTION) {
+            archivo = seleccionar.getSelectedFile();            
+            if (archivo.getName().endsWith("txt")) {
+                String Documento = modelo.getDataVector().toString();
+                String mensaje = this.guardarArchivo(archivo, Documento);
+                if (mensaje != null) {
+                    JOptionPane.showMessageDialog(null, mensaje);
+                } else {
+                    JOptionPane.showMessageDialog(null, "No se ha selecciona un archivo txt");
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Archivo debe terminar con .txt");
+            }
+        }
+    }//GEN-LAST:event_guardarAutomataBotonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -166,13 +252,15 @@ public class AutomataVista extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JTable Tabla;
+    private javax.swing.JButton evaluarBoton;
+    private javax.swing.JButton guardarAutomataBoton;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextPane jTextPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextField resultadoTexto;
     // End of variables declaration//GEN-END:variables
 }

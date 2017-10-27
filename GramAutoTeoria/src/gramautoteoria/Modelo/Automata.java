@@ -2,6 +2,7 @@
 package gramautoteoria.Modelo;
 
 import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 
 
 
@@ -221,6 +222,34 @@ public class Automata {
             }
         }
         return false;
+    }
+    
+    public void imprimirAutomataTabla(DefaultTableModel modelo){
+        int numColumnas = this.simbolosEntrada.size()+2;
+        Object[] fila = new Object[numColumnas];
+        modelo.addColumn("Estado");
+        for(int j=0;j<this.simbolosEntrada.size();j++){                
+                modelo.addColumn(this.simbolosEntrada.get(j));
+            }
+        modelo.addColumn("Aceptación");
+        for(int i=0;i<this.estados.size();i++){
+            EstadoAutomata estado = this.estados.get(i);
+            for(int j=0;j<this.simbolosEntrada.size();j++){                
+                ArrayList<String> transicionesSimbolo = estado.evaluarTransicion(this.getSimbolosEntrada().get(j));
+                String transicion = transicionesSimbolo.toString();
+                fila[j+1] = transicion;
+            }
+            fila[0] = estado.getEstado();
+            if(estado.isAceptacion()){
+                fila[numColumnas-1] = "1";
+            }
+            else{
+                fila[numColumnas-1] = "0";
+            }
+            
+            
+            modelo.addRow(fila);
+        }
     }
     
 }
