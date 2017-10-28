@@ -92,4 +92,29 @@ public class Produccion {
         }        
         return true;
     }
+
+    boolean esEspecial() {
+        String derecho = this.derecha;
+        if (derecho.equals("")) {
+            return true;
+        }
+        if(derecho.length()<2){
+            return false;
+        }
+        for (int i = 1; i < derecho.length(); i++) {
+            if (!derecho.substring(i, i + 1).equals("<")) {
+                return false;
+            }
+            if (derecho.substring(i, i + 1).equals("<")) {
+                while (!derecho.substring(i, i + 1).equals(">")) {
+                    i++;
+                }
+                String aux = derecho.substring(i + 1);
+                if (aux.length() > 0) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
 }

@@ -39,6 +39,7 @@ public class AutomataVista extends javax.swing.JFrame {
         gramaticaTexto = gramaticaTexto.replace(" ", "");
         gramaticaTexto = gramaticaTexto.replace("\r", "");
         gramaticaObjeto.generarGramaticaFichero(gramaticaTexto);
+        gramaticaObjeto = gramaticaObjeto.convertirLinealDerecha();
         automata = gramaticaObjeto.gramaticaAAutomata();
         DefaultTableModel modelo = (DefaultTableModel) Tabla.getModel();
         automata.imprimirAutomataTabla(modelo);
@@ -240,7 +241,8 @@ public class AutomataVista extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         Automata nuevo = automata.eliminarEstadosExtraños();
         automata = nuevo;
-        DefaultTableModel modelo = (DefaultTableModel) Tabla.getModel();
+        DefaultTableModel modelo = new DefaultTableModel();
+                    Tabla.setModel(modelo);
         automata.imprimirAutomataTabla(modelo);
     }//GEN-LAST:event_jButton2ActionPerformed
 

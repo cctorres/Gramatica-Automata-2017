@@ -407,6 +407,10 @@ public class GramaticaVista extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "No se ha ingresado una gramática a evaluar");
             return;
         }
+        if(!gramatica.esRegular()){
+            JOptionPane.showMessageDialog(null, "No es posible convertir la gramática a un AF");
+            return;
+        }
         AutomataVista grafica = new AutomataVista();
         grafica.setVisible(true);
     }//GEN-LAST:event_automataBotonActionPerformed

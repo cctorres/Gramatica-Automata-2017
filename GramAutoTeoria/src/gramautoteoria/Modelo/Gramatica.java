@@ -39,8 +39,8 @@ public class Gramatica {
         return resultado;
     }
     
-    public void agregarProduccion(String produccion, String destino){
-        Produccion produccionNueva = new Produccion(produccion,destino);
+    public void agregarProduccion(String izquierda, String derecha){
+        Produccion produccionNueva = new Produccion(izquierda,derecha);
         this.getProducciones().add(produccionNueva);
     }
     
@@ -228,7 +228,7 @@ public class Gramatica {
         Automata automata = new Automata();
         for(int i=0; i<this.producciones.size();i++){
             Produccion prod = this.producciones.get(i);
-            String estado = prod.getIzquierdo().substring(1, prod.getIzquierdo().length()-1);
+            String estado = prod.getIzquierdo();
             if(prod.getDerecha().equals("")){
                 int pos = automata.retonarPosEstado(estado);
                 if(pos != -1){
@@ -242,7 +242,7 @@ public class Gramatica {
             else{
             String derecha = prod.getDerecha();
             String simbolo = derecha.substring(0,1);
-            String transicion = derecha.substring(2, prod.getIzquierdo().length());
+            String transicion = derecha.substring(1);
             automata.agregarTransicionAutomata(estado, simbolo, transicion);
             }
             
@@ -261,5 +261,86 @@ public class Gramatica {
             this.producciones.get(i).setDerecha(derecho);
             this.producciones.get(i).setIzquierdo(izquierda);
         }
+    }
+    
+    public Gramatica convertirLinealDerecha() {
+        Gramatica LD = new Gramatica();
+        if (!this.esRegular()) {
+            return LD;
+        }
+        boolean nulo = false;
+        for (int i = 0; i < this.producciones.size(); i++) {
+            Produccion produccion = this.producciones.get(i);
+            if (produccion.esEspecial()) {
+                LD.agregarProduccion(produccion.getIzquierdo(), produccion.getDerecha());
+            } else {
+                if (produccion.getDerecha().length() == 1) {
+                    LD.agregarProduccion(produccion.getIzquierdo(), produccion.getDerecha() + "<nulo>");
+                    nulo = true;
+
+                } else {
+                    if (!produccion.getDerecha().substring(0, 1).equals("<")) {
+                        String textoDerecha = produccion.getDerecha();
+                        String simbolo = "";
+                        String NT = "";
+                        int k = 0;
+                        for(int h = 0;h<produccion.getDerecha().length();h++){
+                            k++;
+                            if(produccion.getDerecha().substring(h, h+1).equals("<") ){
+                            
+                            break;
+                        }
+                        }
+                        
+                        textoDerecha = textoDerecha.replace("<", "");
+                        textoDerecha = textoDerecha.replace(">", "");
+                        int j = 1;
+                        simbolo = textoDerecha.substring(0, 1);
+                        NT = textoDerecha.substring(1);
+                        LD.agregarProduccion(produccion.getIzquierdo(), simbolo+"<"+NT+">");
+                        textoDerecha = textoDerecha.substring(1);
+                        while(j<k-1){
+                            simbolo = textoDerecha.substring(0, 1);
+                            NT = textoDerecha.substring(1);
+                            LD.agregarProduccion("<"+textoDerecha+">",simbolo+"<"+NT+">");
+                            textoDerecha = textoDerecha.substring(1);
+                            j++;
+                        }
+                    } 
+                }
+
+            }
+
+        }
+        for(int i=0;i<this.producciones.size();i++){
+            Produccion produccion = this.producciones.get(i);
+            if(produccion.getDerecha().length() == 0){
+                
+            }
+            else{
+                if(produccion.getDerecha().substring(0, 1).equals("<")){
+                ArrayList<String> derechos = LD.retornarDerechos(produccion.getDerecha());
+                for(int j=0;j<derechos.size();j++){
+                    LD.agregarProduccion(produccion.getIzquierdo(), derechos.get(j));
+                }
+            }
+            }
+            
+        }
+        if (nulo) {
+            LD.agregarProduccion("<nulo>", "");
+        }
+        return LD;
+    }
+    
+    public ArrayList<String> retornarDerechos(String NT){
+        ArrayList<String> derechos = new ArrayList<>();
+        for(int i=0;i<this.producciones.size();i++){
+            Produccion produccion = this.producciones.get(i);
+            if(produccion.getIzquierdo().equals(NT)){
+                derechos.add(produccion.getDerecha());
+            }
+        }
+        return derechos;
     }
 }
