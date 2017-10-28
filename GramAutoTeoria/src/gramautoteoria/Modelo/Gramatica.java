@@ -193,7 +193,7 @@ public class Gramatica {
         this.setProducciones(nuevo);
     }
     
-    public void generarGramaticaFiche(String fichero) {
+    public void generarGramaticaFichero(String fichero) {
         String[] lineas = fichero.split("\n");
         String izquierda = "";
         String derecha = "";
@@ -248,5 +248,18 @@ public class Gramatica {
             
         }
         return automata;
+    }
+    
+    public void quitarEspacios(){
+        for(int i=0;i<this.producciones.size();i++){
+            String derecho = this.producciones.get(i).getDerecha();
+            String izquierda = this.producciones.get(i).getIzquierdo();
+            derecho = derecho.replace(" ", "");
+            derecho = derecho.replace("\r", "");
+            izquierda = izquierda.replace(" ", "");
+            izquierda = izquierda.replace("\r", "");
+            this.producciones.get(i).setDerecha(derecho);
+            this.producciones.get(i).setIzquierdo(izquierda);
+        }
     }
 }

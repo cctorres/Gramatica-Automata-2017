@@ -94,16 +94,17 @@ public class Automata {
     }
     
     public String imprimirAutomata(){
-        String resultado = "Simbolos de entrada: ";
+        String resultado = "{Simbolos de entrada: ";
         for(int i = 0; i < this.simbolosEntrada.size(); i++){
             resultado = resultado+this.simbolosEntrada.get(i)+",";
         }
+        resultado = resultado +"}";
         for(int i = 0; i < this.estados.size(); i++){
-            resultado = resultado+"\n"+"Estado "+this.estados.get(i).getEstado()+" :";
+            resultado = resultado+"\n"+"{Estado "+this.estados.get(i).getEstado()+":";
             for(int j = 0; j < this.estados.get(i).getTransiciones().size(); j++){
-                resultado = resultado+ this.estados.get(i).getTransiciones().get(j).getSimbolo()+" -> "+ this.estados.get(i).getTransiciones().get(j).getTransición()+" -- ";
+                resultado = resultado+ this.estados.get(i).getTransiciones().get(j).getSimbolo()+">"+ this.estados.get(i).getTransiciones().get(j).getTransición()+"-";
             }
-            resultado = resultado+"  :: "+this.estados.get(i).isAceptacion();
+            resultado = resultado+"*"+this.estados.get(i).isAceptacion()+"}";
         }
         return resultado;
     }
@@ -250,6 +251,59 @@ public class Automata {
             
             modelo.addRow(fila);
         }
+    }
+    
+    public Automata generarAutomataFichero(String fichero){
+        String[] vector = fichero.split("}");
+        Automata automata = new Automata();
+        String simbolos = vector[0].substring(19);
+        for(int i=0;i<simbolos.length();i++){
+            automata.agregarSimboloEntrada(simbolos.substring(i,i+1));
+            i++;
+        }
+        for(int i=1;i<vector.length;i++){
+            String estadoCompleto = vector[i].substring(9);
+            String estado = "";
+            String auxiliar = "";
+            String simboloEntrada = "";
+            String transicion = "";
+            EstadoAutomata estadoAutomata = new EstadoAutomata();
+            for(int j=0;j<estadoCompleto.length();j++){
+                if(estadoCompleto.substring(j,j+1).equals(":")){
+                    estado = auxiliar;
+                    estadoAutomata.setEstado(estado);
+                    auxiliar = "";
+                    j++;
+                    
+                }
+                if(estadoCompleto.substring(j,j+1).equals(">")){
+                    simboloEntrada = auxiliar;
+                    auxiliar = "";
+                    j++;
+                    
+                }
+                if(estadoCompleto.substring(j,j+1).equals("-")){
+                    transicion = auxiliar;
+                    estadoAutomata.agregarTransicion(simboloEntrada, transicion);
+                    auxiliar = "";
+                    j++;                    
+                }
+                if(estadoCompleto.substring(j,j+1).equals("*")){
+                    if(estadoCompleto.substring(j+1, j+2).equals("t")){
+                        estadoAutomata.setAceptacion(true);
+                    }
+                    else{
+                        estadoAutomata.setAceptacion(false);
+                    }
+                    automata.estados.add(estadoAutomata);
+                    j = 1000000;
+                    break;                    
+                }
+                auxiliar = auxiliar+estadoCompleto.substring(j,j+1);
+                
+            }
+        }
+        return automata;
     }
     
 }

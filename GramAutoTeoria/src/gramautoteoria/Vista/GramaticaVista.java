@@ -327,7 +327,8 @@ public class GramaticaVista extends javax.swing.JFrame {
                     String documento = this.abrirArchivo(archivo);
                     gramaticaTexto.setText(documento);
                     this.gramatica.reiniciarGramatica();
-                    this.gramatica.generarGramaticaFiche(documento);
+                    this.gramatica.generarGramaticaFichero(documento);
+                    this.gramatica.quitarEspacios();
                     gramaticaTexto.setText(this.gramatica.imprimirGramatica());
                     
                 }

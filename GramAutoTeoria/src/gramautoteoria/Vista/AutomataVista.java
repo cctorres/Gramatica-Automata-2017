@@ -38,7 +38,7 @@ public class AutomataVista extends javax.swing.JFrame {
         
         gramaticaTexto = gramaticaTexto.replace(" ", "");
         gramaticaTexto = gramaticaTexto.replace("\r", "");
-        gramaticaObjeto.generarGramaticaFiche(gramaticaTexto);
+        gramaticaObjeto.generarGramaticaFichero(gramaticaTexto);
         automata = gramaticaObjeto.gramaticaAAutomata();
         DefaultTableModel modelo = (DefaultTableModel) Tabla.getModel();
         automata.imprimirAutomataTabla(modelo);
@@ -95,7 +95,7 @@ public class AutomataVista extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         Tabla = new javax.swing.JTable();
         guardarAutomataBoton = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        leerBoton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -109,8 +109,18 @@ public class AutomataVista extends javax.swing.JFrame {
         });
 
         jButton2.setText("Eliminar Estados Extraños");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         deterministicoBoton.setText("¿Es deterministico?");
+        deterministicoBoton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deterministicoBotonActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Estados Equivalentes");
 
@@ -131,7 +141,12 @@ public class AutomataVista extends javax.swing.JFrame {
             }
         });
 
-        jButton6.setText("Leer automata");
+        leerBoton.setText("Leer automata");
+        leerBoton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                leerBotonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -141,7 +156,7 @@ public class AutomataVista extends javax.swing.JFrame {
                 .addGap(41, 41, 41)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton6)
+                        .addComponent(leerBoton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(guardarAutomataBoton))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -164,7 +179,7 @@ public class AutomataVista extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(guardarAutomataBoton)
-                    .addComponent(jButton6))
+                    .addComponent(leerBoton))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -200,7 +215,7 @@ public class AutomataVista extends javax.swing.JFrame {
         if (seleccionar.showDialog(null, "Guardar") == JFileChooser.APPROVE_OPTION) {
             archivo = seleccionar.getSelectedFile();            
             if (archivo.getName().endsWith("txt")) {
-                String Documento = modelo.getDataVector().toString();
+                String Documento = automata.imprimirAutomata();
                 String mensaje = this.guardarArchivo(archivo, Documento);
                 if (mensaje != null) {
                     JOptionPane.showMessageDialog(null, mensaje);
@@ -212,6 +227,45 @@ public class AutomataVista extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_guardarAutomataBotonActionPerformed
+
+    private void deterministicoBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deterministicoBotonActionPerformed
+        if(automata.esDeterministico()){
+            resultadoTexto.setText("El automata es deterministico");
+        }
+        else{
+            resultadoTexto.setText("El automata no es deterministico");
+        }
+    }//GEN-LAST:event_deterministicoBotonActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        Automata nuevo = automata.eliminarEstadosExtraños();
+        automata = nuevo;
+        DefaultTableModel modelo = (DefaultTableModel) Tabla.getModel();
+        automata.imprimirAutomataTabla(modelo);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void leerBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_leerBotonActionPerformed
+        if(seleccionar.showDialog(null, "Abrir")==JFileChooser.APPROVE_OPTION){
+            archivo = seleccionar.getSelectedFile();
+            if(archivo.canRead()){
+                if(archivo.getName().endsWith("txt")){
+                    String documento = this.abrirArchivo(archivo);
+                    
+                    documento = documento.replace(" ", "");
+                    documento = documento.replace("\r", "");
+                    DefaultTableModel modelo = new DefaultTableModel();
+                    Tabla.setModel(modelo);
+                    automata = automata.generarAutomataFichero(documento);
+                    automata.imprimirAutomataTabla(modelo);
+                    
+                    
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "No se ha seleccionado un archivo txt");
+                }
+            }
+        }
+    }//GEN-LAST:event_leerBotonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -258,9 +312,9 @@ public class AutomataVista extends javax.swing.JFrame {
     private javax.swing.JButton guardarAutomataBoton;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JButton leerBoton;
     private javax.swing.JTextField resultadoTexto;
     // End of variables declaration//GEN-END:variables
 }

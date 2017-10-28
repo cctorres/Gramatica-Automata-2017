@@ -76,6 +76,9 @@ public class Produccion {
     
     public boolean esLinealDerecha(){
         String derecho = this.derecha;
+        if(derecho.equals("")){
+            return true;
+        }
         for(int i = 0; i < derecho.length(); i++){
             if(derecho.substring(i, i+1).equals("<")){
                 while(!derecho.substring(i, i+1).equals(">")){                    
