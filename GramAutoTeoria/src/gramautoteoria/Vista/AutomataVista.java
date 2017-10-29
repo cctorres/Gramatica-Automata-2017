@@ -90,7 +90,7 @@ public class AutomataVista extends javax.swing.JFrame {
         resultadoTexto = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         evaluarBoton = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        estadosExtrañosBoton = new javax.swing.JButton();
         deterministicoBoton = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -109,10 +109,10 @@ public class AutomataVista extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Eliminar Estados Extraños");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        estadosExtrañosBoton.setText("Eliminar Estados Extraños");
+        estadosExtrañosBoton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                estadosExtrañosBotonActionPerformed(evt);
             }
         });
 
@@ -162,7 +162,7 @@ public class AutomataVista extends javax.swing.JFrame {
                         .addComponent(guardarAutomataBoton))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
-                            .addComponent(jButton2)
+                            .addComponent(estadosExtrañosBoton)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(jButton4))
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -191,7 +191,7 @@ public class AutomataVista extends javax.swing.JFrame {
                     .addComponent(evaluarBoton))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
+                    .addComponent(estadosExtrañosBoton)
                     .addComponent(jButton4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(deterministicoBoton)
@@ -238,13 +238,13 @@ public class AutomataVista extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_deterministicoBotonActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void estadosExtrañosBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_estadosExtrañosBotonActionPerformed
         Automata nuevo = automata.eliminarEstadosExtraños();
         automata = nuevo;
         DefaultTableModel modelo = new DefaultTableModel();
                     Tabla.setModel(modelo);
         automata.imprimirAutomataTabla(modelo);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_estadosExtrañosBotonActionPerformed
 
     private void leerBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_leerBotonActionPerformed
         if(seleccionar.showDialog(null, "Abrir")==JFileChooser.APPROVE_OPTION){
@@ -310,9 +310,9 @@ public class AutomataVista extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable Tabla;
     private javax.swing.JButton deterministicoBoton;
+    private javax.swing.JButton estadosExtrañosBoton;
     private javax.swing.JButton evaluarBoton;
     private javax.swing.JButton guardarAutomataBoton;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane2;
