@@ -90,45 +90,85 @@ public class AutomataVista extends javax.swing.JFrame {
         resultadoTexto = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         evaluarBoton = new javax.swing.JButton();
-        estadosExtrañosBoton = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         deterministicoBoton = new javax.swing.JButton();
-        estadosEquivalentesBoton = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         Tabla = new javax.swing.JTable();
         guardarAutomataBoton = new javax.swing.JButton();
         leerBoton = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().add(resultadoTexto, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 490, 680, -1));
 
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Evaluar hilera");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 460, -1, -1));
 
+        evaluarBoton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gramautoteoria/Img/FondoBtnSombra2.png"))); // NOI18N
         evaluarBoton.setText("Evaluar");
+        evaluarBoton.setBorderPainted(false);
+        evaluarBoton.setContentAreaFilled(false);
+        evaluarBoton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        evaluarBoton.setDefaultCapable(false);
+        evaluarBoton.setFocusPainted(false);
+        evaluarBoton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         evaluarBoton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 evaluarBotonActionPerformed(evt);
             }
         });
+        getContentPane().add(evaluarBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 470, -1, 60));
 
-        estadosExtrañosBoton.setText("Eliminar Estados Extraños");
-        estadosExtrañosBoton.addActionListener(new java.awt.event.ActionListener() {
+        jButton2.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gramautoteoria/Img/FondoBtnSombra.png"))); // NOI18N
+        jButton2.setText("Eliminar Estados Extraños");
+        jButton2.setBorderPainted(false);
+        jButton2.setContentAreaFilled(false);
+        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton2.setFocusPainted(false);
+        jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                estadosExtrañosBotonActionPerformed(evt);
+                jButton2ActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 530, -1, -1));
 
-        deterministicoBoton.setText("¿Es deterministico?");
+        deterministicoBoton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gramautoteoria/Img/FondoBtnSombra.png"))); // NOI18N
+        deterministicoBoton.setText("¿Es determinístico?");
+        deterministicoBoton.setBorderPainted(false);
+        deterministicoBoton.setContentAreaFilled(false);
+        deterministicoBoton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        deterministicoBoton.setDefaultCapable(false);
+        deterministicoBoton.setFocusPainted(false);
+        deterministicoBoton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         deterministicoBoton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deterministicoBotonActionPerformed(evt);
             }
         });
+        getContentPane().add(deterministicoBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 530, 155, -1));
 
-        estadosEquivalentesBoton.setText("Eliminar Estados Equivalentes");
-        estadosEquivalentesBoton.addActionListener(new java.awt.event.ActionListener() {
+        jButton4.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gramautoteoria/Img/FondoBtnSombra.png"))); // NOI18N
+        jButton4.setText("Eliminar Estados Equivalentes");
+        jButton4.setBorderPainted(false);
+        jButton4.setContentAreaFilled(false);
+        jButton4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton4.setFocusPainted(false);
+        jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                estadosEquivalentesBotonActionPerformed(evt);
+                jButton4ActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 530, -1, -1));
 
         Tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -140,68 +180,56 @@ public class AutomataVista extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(Tabla);
 
-        guardarAutomataBoton.setText("Guardar automata");
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, 770, 302));
+
+        guardarAutomataBoton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gramautoteoria/Img/FondoBtnSombra2.png"))); // NOI18N
+        guardarAutomataBoton.setText("Guardar ");
+        guardarAutomataBoton.setBorderPainted(false);
+        guardarAutomataBoton.setContentAreaFilled(false);
+        guardarAutomataBoton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        guardarAutomataBoton.setFocusPainted(false);
+        guardarAutomataBoton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         guardarAutomataBoton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 guardarAutomataBotonActionPerformed(evt);
             }
         });
+        getContentPane().add(guardarAutomataBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 70, 130, -1));
 
-        leerBoton.setText("Leer automata");
+        leerBoton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gramautoteoria/Img/FondoBtnSombra2.png"))); // NOI18N
+        leerBoton.setText("Leer ");
+        leerBoton.setBorderPainted(false);
+        leerBoton.setContentAreaFilled(false);
+        leerBoton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        leerBoton.setDefaultCapable(false);
+        leerBoton.setFocusPainted(false);
+        leerBoton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         leerBoton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 leerBotonActionPerformed(evt);
             }
         });
+        getContentPane().add(leerBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 70, 130, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(41, 41, 41)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(leerBoton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(guardarAutomataBoton))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(estadosExtrañosBoton)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(estadosEquivalentesBoton))
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel1)
-                        .addComponent(deterministicoBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(resultadoTexto, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(evaluarBoton))))
-                .addContainerGap(39, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(guardarAutomataBoton)
-                    .addComponent(leerBoton))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(resultadoTexto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(evaluarBoton))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(estadosExtrañosBoton)
-                    .addComponent(estadosEquivalentesBoton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(deterministicoBoton)
-                .addContainerGap(20, Short.MAX_VALUE))
-        );
+        jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButton1.setText("X");
+        jButton1.setBorderPainted(false);
+        jButton1.setContentAreaFilled(false);
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton1.setDefaultCapable(false);
+        jButton1.setFocusPainted(false);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 0, 50, 40));
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gramautoteoria/Img/Título.png"))); // NOI18N
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, -1, -1));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gramautoteoria/Img/Fondo.png"))); // NOI18N
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 850, 600));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -243,13 +271,13 @@ public class AutomataVista extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_deterministicoBotonActionPerformed
 
-    private void estadosExtrañosBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_estadosExtrañosBotonActionPerformed
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         Automata nuevo = automata.eliminarEstadosExtraños();
         automata = nuevo;
         DefaultTableModel modelo = new DefaultTableModel();
                     Tabla.setModel(modelo);
         automata.imprimirAutomataTabla(modelo);
-    }//GEN-LAST:event_estadosExtrañosBotonActionPerformed
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     private void leerBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_leerBotonActionPerformed
         if(seleccionar.showDialog(null, "Abrir")==JFileChooser.APPROVE_OPTION){
@@ -261,9 +289,9 @@ public class AutomataVista extends javax.swing.JFrame {
                     documento = documento.replace(" ", "");
                     documento = documento.replace("\r", "");
                     DefaultTableModel modelo = new DefaultTableModel();
+                    Tabla.setModel(modelo);
                     automata = automata.generarAutomataFichero(documento);
                     automata.imprimirAutomataTabla(modelo);
-                    Tabla.setModel(modelo);
                     
                     
                 }
@@ -274,12 +302,23 @@ public class AutomataVista extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_leerBotonActionPerformed
 
-    private void estadosEquivalentesBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_estadosEquivalentesBotonActionPerformed
-        automata.eliminarEstadosEquivalentes();
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        this.dispose();
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+       try { automata.eliminarEstadosEquivalentes();
         DefaultTableModel modelo = new DefaultTableModel();
         Tabla.setModel(modelo);
-        automata.imprimirAutomataTabla(modelo);
-    }//GEN-LAST:event_estadosEquivalentesBotonActionPerformed
+        automata.imprimirAutomataTabla(modelo);  
+       }catch(NumberFormatException e) {
+           resultadoTexto.setText("El automata no tiene estados equivalentes");
+       }
+        
+        
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -322,11 +361,14 @@ public class AutomataVista extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable Tabla;
     private javax.swing.JButton deterministicoBoton;
-    private javax.swing.JButton estadosEquivalentesBoton;
-    private javax.swing.JButton estadosExtrañosBoton;
     private javax.swing.JButton evaluarBoton;
     private javax.swing.JButton guardarAutomataBoton;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton leerBoton;
     private javax.swing.JTextField resultadoTexto;

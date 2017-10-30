@@ -7,6 +7,7 @@ package gramautoteoria.Vista;
 
 import gramautoteoria.Modelo.Automata;
 import gramautoteoria.Modelo.Gramatica;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -98,85 +99,174 @@ public class GramaticaVista extends javax.swing.JFrame {
         automataBoton = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
 
         jLabel4.setText("jLabel4");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
+        setResizable(false);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        guardarBoton.setText("Guardar archivo");
+        guardarBoton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gramautoteoria/Img/FondoBtnSombra2.png"))); // NOI18N
+        guardarBoton.setText("Guardar ");
+        guardarBoton.setBorderPainted(false);
+        guardarBoton.setContentAreaFilled(false);
+        guardarBoton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        guardarBoton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         guardarBoton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 guardarBotonActionPerformed(evt);
             }
         });
+        getContentPane().add(guardarBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 90, 100, 60));
 
-        leerBoton.setText("Leer archivo");
+        leerBoton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gramautoteoria/Img/FondoBtnSombra2.png"))); // NOI18N
+        leerBoton.setText("Leer ");
+        leerBoton.setBorderPainted(false);
+        leerBoton.setContentAreaFilled(false);
+        leerBoton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        leerBoton.setFocusPainted(false);
+        leerBoton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         leerBoton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 leerBotonActionPerformed(evt);
             }
         });
+        getContentPane().add(leerBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 90, 80, 60));
 
         jLabel1.setText("Lado derecho");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 90, -1, -1));
+        getContentPane().add(derechoTexto, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 110, 291, -1));
 
         jLabel2.setText("Lado izquierdo");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, -1, -1));
+        getContentPane().add(izquierdoTexto, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, 144, -1));
 
+        ingresarBotón.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gramautoteoria/Img/FondoBtnSombra.png"))); // NOI18N
         ingresarBotón.setText("Ingresar producción");
+        ingresarBotón.setAlignmentY(0.0F);
+        ingresarBotón.setBorderPainted(false);
+        ingresarBotón.setContentAreaFilled(false);
+        ingresarBotón.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        ingresarBotón.setDisplayedMnemonicIndex(0);
+        ingresarBotón.setFocusPainted(false);
+        ingresarBotón.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        ingresarBotón.setIconTextGap(0);
         ingresarBotón.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ingresarBotónActionPerformed(evt);
             }
         });
+        getContentPane().add(ingresarBotón, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 100, 150, 40));
 
         jScrollPane1.setViewportView(gramaticaTexto);
 
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 139, 770, 200));
+
+        esSimplificableBoton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gramautoteoria/Img/FondoBtnSombra.png"))); // NOI18N
         esSimplificableBoton.setText("¿Es simplificable?");
+        esSimplificableBoton.setBorderPainted(false);
+        esSimplificableBoton.setContentAreaFilled(false);
+        esSimplificableBoton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        esSimplificableBoton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         esSimplificableBoton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 esSimplificableBotonActionPerformed(evt);
             }
         });
+        getContentPane().add(esSimplificableBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, -1, -1));
 
         jScrollPane2.setViewportView(NTTexto);
 
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 399, 770, 110));
+
+        conjuntosBoton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gramautoteoria/Img/FondoBtnSombra2.png"))); // NOI18N
         conjuntosBoton.setText("Conjuntos");
+        conjuntosBoton.setBorderPainted(false);
+        conjuntosBoton.setContentAreaFilled(false);
+        conjuntosBoton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        conjuntosBoton.setDefaultCapable(false);
+        conjuntosBoton.setFocusPainted(false);
+        conjuntosBoton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         conjuntosBoton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 conjuntosBotonActionPerformed(evt);
             }
         });
+        getContentPane().add(conjuntosBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 340, -1, -1));
 
+        simplificarBoton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gramautoteoria/Img/FondoBtnSombra2.png"))); // NOI18N
         simplificarBoton.setText("Simplificar");
+        simplificarBoton.setBorderPainted(false);
+        simplificarBoton.setContentAreaFilled(false);
+        simplificarBoton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        simplificarBoton.setFocusPainted(false);
+        simplificarBoton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         simplificarBoton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 simplificarBotonActionPerformed(evt);
             }
         });
+        getContentPane().add(simplificarBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 340, -1, -1));
 
-        regularBoton.setText("¿Es regular?");
+        regularBoton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gramautoteoria/Img/FondoBtnSombra2.png"))); // NOI18N
+        regularBoton.setText("Es regular?");
+        regularBoton.setBorderPainted(false);
+        regularBoton.setContentAreaFilled(false);
+        regularBoton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        regularBoton.setFocusPainted(false);
+        regularBoton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         regularBoton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 regularBotonActionPerformed(evt);
             }
         });
+        getContentPane().add(regularBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 340, -1, -1));
 
+        editarBoton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gramautoteoria/Img/FondoBtnSombra2.png"))); // NOI18N
         editarBoton.setText("Editar");
+        editarBoton.setBorderPainted(false);
+        editarBoton.setContentAreaFilled(false);
+        editarBoton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        editarBoton.setFocusPainted(false);
+        editarBoton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         editarBoton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 editarBotonActionPerformed(evt);
             }
         });
+        getContentPane().add(editarBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 520, -1, 60));
 
+        eliminarBoton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gramautoteoria/Img/FondoBtnSombra2.png"))); // NOI18N
         eliminarBoton.setText("Eliminar");
+        eliminarBoton.setBorderPainted(false);
+        eliminarBoton.setContentAreaFilled(false);
+        eliminarBoton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        eliminarBoton.setFocusPainted(false);
+        eliminarBoton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         eliminarBoton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 eliminarBotonActionPerformed(evt);
             }
         });
+        getContentPane().add(eliminarBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 510, -1, 80));
 
+        posicionTexto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                posicionTextoKeyTyped(evt);
+            }
+        });
         jScrollPane3.setViewportView(posicionTexto);
 
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 540, 50, -1));
+
         jScrollPane4.setViewportView(cambioTexto);
+
+        getContentPane().add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 540, 380, -1));
 
         izquierdaCheck.setText("Izquierda");
         izquierdaCheck.addActionListener(new java.awt.event.ActionListener() {
@@ -184,6 +274,7 @@ public class GramaticaVista extends javax.swing.JFrame {
                 izquierdaCheckActionPerformed(evt);
             }
         });
+        getContentPane().add(izquierdaCheck, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 533, -1, 30));
 
         derechaCheck.setText("Derecha");
         derechaCheck.addActionListener(new java.awt.event.ActionListener() {
@@ -191,130 +282,53 @@ public class GramaticaVista extends javax.swing.JFrame {
                 derechaCheckActionPerformed(evt);
             }
         });
+        getContentPane().add(derechaCheck, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 533, -1, 30));
 
-        automataBoton.setText("Automata");
+        automataBoton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gramautoteoria/Img/FondoBtnSombra2.png"))); // NOI18N
+        automataBoton.setText("Autómata");
+        automataBoton.setBorderPainted(false);
+        automataBoton.setContentAreaFilled(false);
+        automataBoton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        automataBoton.setFocusPainted(false);
+        automataBoton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         automataBoton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 automataBotonActionPerformed(evt);
             }
         });
+        getContentPane().add(automataBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 340, 91, -1));
 
-        jLabel3.setText("Posición");
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Posición:");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 520, -1, -1));
 
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Nuevo texto:");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 520, -1, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(200, 200, 200)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(leerBoton)
-                                    .addComponent(derechoTexto, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(ingresarBotón, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
-                                    .addComponent(guardarBoton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(45, 45, 45)
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGap(43, 43, 43)
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(36, 36, 36)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(derechaCheck)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(izquierdaCheck)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(eliminarBoton)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(editarBoton))))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(43, 43, 43)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane1)
-                            .addComponent(jScrollPane2)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(esSimplificableBoton)
-                                .addGap(18, 18, 18)
-                                .addComponent(conjuntosBoton)
-                                .addGap(18, 18, 18)
-                                .addComponent(simplificarBoton)
-                                .addGap(108, 108, 108)
-                                .addComponent(regularBoton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(automataBoton, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)))))
-                .addContainerGap(39, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(44, 44, 44)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel2)
-                        .addComponent(izquierdoTexto, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addContainerGap(499, Short.MAX_VALUE)))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(guardarBoton)
-                    .addComponent(leerBoton))
-                .addGap(25, 25, 25)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ingresarBotón)
-                    .addComponent(derechoTexto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(esSimplificableBoton)
-                    .addComponent(conjuntosBoton)
-                    .addComponent(simplificarBoton)
-                    .addComponent(regularBoton)
-                    .addComponent(automataBoton))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(izquierdaCheck)
-                        .addComponent(eliminarBoton)
-                        .addComponent(editarBoton))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(derechaCheck)
-                .addContainerGap())
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(62, 62, 62)
-                    .addComponent(jLabel2)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(izquierdoTexto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(434, Short.MAX_VALUE)))
-        );
+        jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButton1.setText("X");
+        jButton1.setBorderPainted(false);
+        jButton1.setContentAreaFilled(false);
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton1.setDefaultCapable(false);
+        jButton1.setFocusPainted(false);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 0, 50, 40));
+
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gramautoteoria/Img/Título1.png"))); // NOI18N
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, -1, 90));
+
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gramautoteoria/Img/Título2.png"))); // NOI18N
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 10, -1, 80));
+
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gramautoteoria/Img/Fondo.png"))); // NOI18N
+        jLabel6.setFocusable(false);
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 850, 600));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -412,6 +426,7 @@ public class GramaticaVista extends javax.swing.JFrame {
             return;
         }
         AutomataVista grafica = new AutomataVista();
+        grafica.setLocationRelativeTo(null);
         grafica.setVisible(true);
     }//GEN-LAST:event_automataBotonActionPerformed
 
@@ -508,6 +523,24 @@ public class GramaticaVista extends javax.swing.JFrame {
         gramaticaTexto.setText(gramatica.imprimirGramatica());
     }//GEN-LAST:event_editarBotonActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
+        this.dispose();
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void posicionTextoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_posicionTextoKeyTyped
+        char c = evt.getKeyChar();
+        if(!Character.isDigit(c)){
+            if((c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE)){
+                return;
+            }
+            evt.consume();
+            JOptionPane.showMessageDialog(null, "El campo sólo pude contener números enteros");
+            
+        }
+    }//GEN-LAST:event_posicionTextoKeyTyped
+
     /**
      * @param args the command line arguments
      */
@@ -559,11 +592,15 @@ public class GramaticaVista extends javax.swing.JFrame {
     private javax.swing.JButton ingresarBotón;
     private javax.swing.JCheckBox izquierdaCheck;
     private javax.swing.JTextField izquierdoTexto;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
