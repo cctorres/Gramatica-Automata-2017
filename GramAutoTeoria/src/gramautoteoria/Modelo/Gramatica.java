@@ -51,7 +51,25 @@ public class Gramatica {
      */
     public void agregarProduccion(String izquierda, String derecha){
         Produccion produccionNueva = new Produccion(izquierda,derecha);
+        if(this.existeProduccion(produccionNueva)){
+            return;
+        }
         this.getProducciones().add(produccionNueva);
+    }
+    
+    /**
+     * Determina si ya existe una producción en la gramática
+     * @param produccion Producción con la cual se desea comparar
+     * @return Boolean con el resultado
+     */
+    public boolean existeProduccion(Produccion produccion){
+        for(int i=0;i<this.producciones.size();i++){//Recorren las producciones
+            if(this.producciones.get(i).getIzquierdo().equals(produccion.getIzquierdo())&//Se pregunta si son iguales
+                    this.producciones.get(i).getDerecha().equals(produccion.getDerecha())){
+                return true;
+            }
+        }
+        return false;
     }
     
     /**

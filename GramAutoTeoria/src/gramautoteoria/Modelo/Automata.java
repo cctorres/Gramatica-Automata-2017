@@ -247,6 +247,39 @@ public class Automata {
         //Se retorna la copia
         return retorno;
     }
+    
+    /**
+     * Elimina los estados que tengan las mismas transiciones y aceptación
+     */
+    public void eliminarEstadosEquivalentes() {        
+        for (int i = 0; i < this.estados.size(); i++) {//Recorre los estados
+            EstadoAutomata estado1 = this.estados.get(i);
+            for (int j = i + 1; j < this.estados.size(); j++) {//Recorre los demás estados
+                EstadoAutomata estado2 = this.estados.get(j);
+                boolean igualdad = true;
+                if (estado1.getTransiciones().size() == estado2.getTransiciones().size() & estado1.isAceptacion() == estado2.isAceptacion()) {
+                    //Se pregunta si los estados tienen la msma aceptación y número transiciones
+                    for (int k = 0; k < estado1.getTransiciones().size(); k++) {//Se recorren las transiciones
+                        Transicion transicion1 = estado1.getTransiciones().get(k);
+                        Transicion transicion2 = estado2.getTransiciones().get(k);
+                        //Se pregunta si las transiciones son iguales
+                        if ((!transicion1.getSimbolo().equals(transicion2.getSimbolo()))
+                                | (!transicion1.getTransición().equals(transicion2.getTransición()))) {
+                            igualdad = false;
+                            break;
+                        }
+                    }
+                } else {
+                    igualdad = false;
+                }
+                if (igualdad) {
+                    //Si se determinó que los estados son iguales, se elimina el segundo
+                    this.estados.remove(j);
+                    j--;
+                }
+            }
+        }
+    }
 
     /**
      * Clona los simbolos de entrada de otro automata
@@ -326,9 +359,11 @@ public class Automata {
         }
         for (int i = 1; i < vector.length; i++) {//Se comienza a recorrer cada línea de texto
             String estadoCompleto = vector[i];
-            estadoCompleto = estadoCompleto.replace("\n", "");      
+            estadoCompleto = estadoCompleto.replace("\n", "");
+            estadoCompleto = estadoCompleto.replace("Estado", "");
+            estadoCompleto = estadoCompleto.replace("{", "");
+            estadoCompleto = estadoCompleto.replace("}", "");
             if (!estadoCompleto.equals("")) {//Asegurarse que no se lea una línea vacía por un salto de línea en el txt
-                estadoCompleto = vector[i].substring(9);//Se ignora el texto que dice "Estado "
                 String estado = "";
                 String auxiliar = "";
                 String simboloEntrada = "";

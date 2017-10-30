@@ -92,7 +92,7 @@ public class AutomataVista extends javax.swing.JFrame {
         evaluarBoton = new javax.swing.JButton();
         estadosExtrañosBoton = new javax.swing.JButton();
         deterministicoBoton = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        estadosEquivalentesBoton = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         Tabla = new javax.swing.JTable();
         guardarAutomataBoton = new javax.swing.JButton();
@@ -123,7 +123,12 @@ public class AutomataVista extends javax.swing.JFrame {
             }
         });
 
-        jButton4.setText("Estados Equivalentes");
+        estadosEquivalentesBoton.setText("Eliminar Estados Equivalentes");
+        estadosEquivalentesBoton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                estadosEquivalentesBotonActionPerformed(evt);
+            }
+        });
 
         Tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -164,7 +169,7 @@ public class AutomataVista extends javax.swing.JFrame {
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(estadosExtrañosBoton)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jButton4))
+                            .addComponent(estadosEquivalentesBoton))
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel1)
                         .addComponent(deterministicoBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -192,7 +197,7 @@ public class AutomataVista extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(estadosExtrañosBoton)
-                    .addComponent(jButton4))
+                    .addComponent(estadosEquivalentesBoton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(deterministicoBoton)
                 .addContainerGap(20, Short.MAX_VALUE))
@@ -256,7 +261,6 @@ public class AutomataVista extends javax.swing.JFrame {
                     documento = documento.replace(" ", "");
                     documento = documento.replace("\r", "");
                     DefaultTableModel modelo = new DefaultTableModel();
-                    Tabla.setModel(modelo);
                     automata = automata.generarAutomataFichero(documento);
                     automata.imprimirAutomataTabla(modelo);
                     Tabla.setModel(modelo);
@@ -269,6 +273,13 @@ public class AutomataVista extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_leerBotonActionPerformed
+
+    private void estadosEquivalentesBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_estadosEquivalentesBotonActionPerformed
+        automata.eliminarEstadosEquivalentes();
+        DefaultTableModel modelo = new DefaultTableModel();
+        Tabla.setModel(modelo);
+        automata.imprimirAutomataTabla(modelo);
+    }//GEN-LAST:event_estadosEquivalentesBotonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -311,10 +322,10 @@ public class AutomataVista extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable Tabla;
     private javax.swing.JButton deterministicoBoton;
+    private javax.swing.JButton estadosEquivalentesBoton;
     private javax.swing.JButton estadosExtrañosBoton;
     private javax.swing.JButton evaluarBoton;
     private javax.swing.JButton guardarAutomataBoton;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton leerBoton;
