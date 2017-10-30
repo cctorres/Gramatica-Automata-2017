@@ -150,7 +150,7 @@ public class Automata {
             resultado = resultado + "\n" + "{Estado " + this.estados.get(i).getEstado() + ":";
             for (int j = 0; j < this.estados.get(i).getTransiciones().size(); j++) {//Recorrido transiciones
                 //Se imprime la transición de la forma simbolo>transición
-                resultado = resultado + this.estados.get(i).getTransiciones().get(j).getSimbolo() + ">" + this.estados.get(i).getTransiciones().get(j).getTransición() + "-";
+                resultado = resultado + this.estados.get(i).getTransiciones().get(j).getSimbolo() + "=" + this.estados.get(i).getTransiciones().get(j).getTransición() + "-";
             }
             //Se cierra el estado con una } para separar cada estado
             resultado = resultado + "*" + this.estados.get(i).isAceptacion() + "}";
@@ -325,53 +325,57 @@ public class Automata {
             i++;
         }
         for (int i = 1; i < vector.length; i++) {//Se comienza a recorrer cada línea de texto
-            String estadoCompleto = vector[i].substring(9);//Se ignora el texto que dice "Estado "
-            String estado = "";
-            String auxiliar = "";
-            String simboloEntrada = "";
-            String transicion = "";
-            EstadoAutomata estadoAutomata = new EstadoAutomata();
-            for (int j = 0; j < estadoCompleto.length(); j++) {//Se recorre la línea de texto
-                if (estadoCompleto.substring(j, j + 1).equals(":")) {
-                    //El Estado es de la forma NombreEstado: Simbolo>EstadoSiguiente -* Aceptación
-                    //Si hay un : es porque se comenzarán a recorrer las transiciones del estado
-                    //Por tanto, guardamos lo anterior al : como el nombre del estado
-                    estado = auxiliar;
-                    estadoAutomata.setEstado(estado);
-                    auxiliar = "";
-                    j++;
+            String estadoCompleto = vector[i];
+            estadoCompleto = estadoCompleto.replace("\n", "");      
+            if (!estadoCompleto.equals("")) {//Asegurarse que no se lea una línea vacía por un salto de línea en el txt
+                estadoCompleto = vector[i].substring(9);//Se ignora el texto que dice "Estado "
+                String estado = "";
+                String auxiliar = "";
+                String simboloEntrada = "";
+                String transicion = "";
+                EstadoAutomata estadoAutomata = new EstadoAutomata();
+                for (int j = 0; j < estadoCompleto.length(); j++) {//Se recorre la línea de texto
+                    if (estadoCompleto.substring(j, j + 1).equals(":")) {
+                        //El Estado es de la forma NombreEstado: Simbolo>EstadoSiguiente -* Aceptación
+                        //Si hay un : es porque se comenzarán a recorrer las transiciones del estado
+                        //Por tanto, guardamos lo anterior al : como el nombre del estado
+                        estado = auxiliar;
+                        estadoAutomata.setEstado(estado);
+                        auxiliar = "";
+                        j++;
 
-                }
-                if (estadoCompleto.substring(j, j + 1).equals(">")) {
-                    //Las transiciones son de la forma simbolo>estadoSiguiente
-                    //Si hay un > es porque se leerá el estado siguiente después de un símbolo
-                    simboloEntrada = auxiliar;
-                    auxiliar = "";
-                    j++;
-
-                }
-                if (estadoCompleto.substring(j, j + 1).equals("-")) {
-                    //Si hay un - es porque se acabó de leer una transicón, débido a que se concordó que cada transición acaba con -
-                    //Por tanto, se agrega la transición al estado
-                    transicion = auxiliar;
-                    estadoAutomata.agregarTransicion(simboloEntrada, transicion);
-                    auxiliar = "";
-                    j++;
-                }
-                if (estadoCompleto.substring(j, j + 1).equals("*")) {
-                    //Si hay un * es pq se terminaron las transiciones y ya solo queda la aceptación del estado
-                    //Si lo que sigue es una t es pq la palabra siguiente es true, por tanto, se pone true en la aceptación
-                    if (estadoCompleto.substring(j + 1, j + 2).equals("t")) {
-                        estadoAutomata.setAceptacion(true);
-                    } else {//De lo contrario, se pone false en la aceptación
-                        estadoAutomata.setAceptacion(false);
                     }
-                    automata.estados.add(estadoAutomata);
-                    j = 1000000;
-                    break; //se deja de leer el resto del estring
-                }
-                auxiliar = auxiliar + estadoCompleto.substring(j, j + 1);
+                    if (estadoCompleto.substring(j, j + 1).equals("=")) {
+                        //Las transiciones son de la forma simbolo>estadoSiguiente
+                        //Si hay un = es porque se leerá el estado siguiente después de un símbolo
+                        simboloEntrada = auxiliar;
+                        auxiliar = "";
+                        j++;
 
+                    }
+                    if (estadoCompleto.substring(j, j + 1).equals("-")) {
+                        //Si hay un - es porque se acabó de leer una transicón, débido a que se concordó que cada transición acaba con -
+                        //Por tanto, se agrega la transición al estado
+                        transicion = auxiliar;
+                        estadoAutomata.agregarTransicion(simboloEntrada, transicion);
+                        auxiliar = "";
+                        j++;
+                    }
+                    if (estadoCompleto.substring(j, j + 1).equals("*")) {
+                        //Si hay un * es pq se terminaron las transiciones y ya solo queda la aceptación del estado
+                        //Si lo que sigue es una t es pq la palabra siguiente es true, por tanto, se pone true en la aceptación
+                        if (estadoCompleto.substring(j + 1, j + 2).equals("t")) {
+                            estadoAutomata.setAceptacion(true);
+                        } else {//De lo contrario, se pone false en la aceptación
+                            estadoAutomata.setAceptacion(false);
+                        }
+                        automata.estados.add(estadoAutomata);
+                        j = 1000000;
+                        break; //se deja de leer el resto del estring
+                    }
+                    auxiliar = auxiliar + estadoCompleto.substring(j, j + 1);
+
+                }
             }
         }
         return automata;

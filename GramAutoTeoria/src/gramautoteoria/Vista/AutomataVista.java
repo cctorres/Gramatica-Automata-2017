@@ -259,6 +259,7 @@ public class AutomataVista extends javax.swing.JFrame {
                     Tabla.setModel(modelo);
                     automata = automata.generarAutomataFichero(documento);
                     automata.imprimirAutomataTabla(modelo);
+                    Tabla.setModel(modelo);
                     
                     
                 }
